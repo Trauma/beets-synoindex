@@ -11,7 +11,7 @@ debug = False
 cmd_synoindex_add_item   = ['dummycommand', '-a']
 cmd_synoindex_add_album  = ['dummycommand', '-A']
 cmd_synoindex_del_item   = ['dummycommand', '-d']
-cmd_synoindex_move       = ['dummycommand', '-N']
+cmd_synoindex_move_item  = ['dummycommand', '-n']
 
 # SynoIndex class
 class SynoIndex(BeetsPlugin):
@@ -36,7 +36,7 @@ class SynoIndex(BeetsPlugin):
         cmd_synoindex_add_item[0] = synoindex_command
         cmd_synoindex_add_album[0] = synoindex_command
         cmd_synoindex_del_item[0] = synoindex_command
-        cmd_synoindex_move[0] = synoindex_command
+        cmd_synoindex_move_item[0] = synoindex_command
 
     def item_imported(self, lib, item):
         if debug: print 'item_imported: lib: ' + str(lib) + ' item: ' + str(item)
@@ -58,11 +58,11 @@ class SynoIndex(BeetsPlugin):
             """ There is no dedicated function with 'synoindex' command to update metadatas for a file but a move with same destination and source works. """
             """ Unfortunatly, this also occurs when running 'beet move' or 'beet move -a', I think this case is a bug... """
             """ So, you will need to comment this line to speedup the process if you do a 'beet move' on whole music library but only some need to be updated... """
-            synonindex_move(source, destination)
+            synonindex_move_item(source, destination)
         else:
             if debug: print 'item_moved: item:' + str(item)
             #print 'item_moved: item: ' + str(item) + ' source: ' + source + ' destination: ' + destination
-            synonindex_move(source, destination)
+            synonindex_move_item(source, destination)
 
 # Helper fcts
 def quote(s):
@@ -86,7 +86,7 @@ def synoindex_get_info(filename):
 def synoindex_add_album(filename):
     if os.path.isdir(filename):
         cmd = list(cmd_synoindex_add_album)
-        cmd.append(filename)
+        cmd.append(quote(filename))
         execute(cmd)
     else:
         print 'Error: ' + quote(filename) + ' does not exist.'
@@ -94,7 +94,7 @@ def synoindex_add_album(filename):
 def synoindex_add_item(filename):
     if os.path.isfile(filename):
         cmd = list(cmd_synoindex_add_item)
-        cmd.append(filename)
+        cmd.append(quote(filename))
         execute(cmd)
     else:
         print 'Error: ' + quote(filename) + ' does not exist.'
@@ -107,9 +107,9 @@ def synoindex_del_item(filename):
     else:
         print 'Error: ' + quote(filename) + ' does not exist.'
 
-def synonindex_move(source, destination):
-    if os.path.isdir(filename):
-        cmd = list(cmd_synoindex_move)
+def synonindex_move_item(source, destination):
+    if os.path.isfile(source):
+        cmd = list(cmd_synoindex_move_item)
         cmd.append(quote(destination))
         cmd.append(quote(source))
         execute(cmd)
