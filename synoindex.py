@@ -104,17 +104,26 @@ def synoindex_add_item(filename):
         print 'Error: ' + quote(filename) + ' does not exist.'
 
 def synoindex_del_file(filename):
-    cmd = list(cmd_synoindex_del_file)
-    cmd.append(quote(filename))
-    execute(cmd)
+    if os.path.isfile(filename):
+        cmd = list(cmd_synoindex_del_file)
+        cmd.append(quote(filename))
+        execute(cmd)
+    else:
+        print 'Error: ' + quote(filename) + ' does not exist.'
 
 def synoindex_del_dir(filename):
-    cmd = list(cmd_synoindex_del_dir)
-    cmd.append(quote(filename))
-    execute(cmd)
+    if os.path.isdir(filename):
+        cmd = list(cmd_synoindex_del_dir)
+        cmd.append(quote(filename))
+        execute(cmd)
+    else:
+        print 'Error: ' + quote(filename) + ' does not exist.'
 
 def synonindex_move(source, destination):
-    cmd = list(cmd_synoindex_move)
-    cmd.append(quote(destination))
-    cmd.append(quote(source))
-    execute(cmd)
+    if os.path.isdir(filename):
+        cmd = list(cmd_synoindex_move)
+        cmd.append(quote(destination))
+        cmd.append(quote(source))
+        execute(cmd)
+    else:
+        print 'Error: ' + quote(filename) + ' does not exist.'
