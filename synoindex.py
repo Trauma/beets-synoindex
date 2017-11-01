@@ -10,8 +10,7 @@ debug = False
 
 cmd_synoindex_add_item   = ['dummycommand', '-a']
 cmd_synoindex_add_album  = ['dummycommand', '-A']
-cmd_synoindex_del_file   = ['dummycommand', '-d']
-cmd_synoindex_del_dir    = ['dummycommand', '-D']
+cmd_synoindex_del_item   = ['dummycommand', '-d']
 cmd_synoindex_move       = ['dummycommand', '-N']
 
 # SynoIndex class
@@ -36,8 +35,7 @@ class SynoIndex(BeetsPlugin):
         if debug: print 'SynoIndex plugin will use: ' + synoindex_command
         cmd_synoindex_add_item[0] = synoindex_command
         cmd_synoindex_add_album[0] = synoindex_command
-        cmd_synoindex_del_file[0] = synoindex_command
-        cmd_synoindex_del_dir[0] = synoindex_command
+        cmd_synoindex_del_item[0] = synoindex_command
         cmd_synoindex_move[0] = synoindex_command
 
     def item_imported(self, lib, item):
@@ -50,7 +48,7 @@ class SynoIndex(BeetsPlugin):
 
     def item_removed(self, item):
         if debug: print 'item_removed: item: ' + str(item)
-        synoindex_del_file(item['path'])
+        synoindex_del_item(item['path'])
 
     def item_moved(self, item, source, destination):
         if debug: print 'item_moved: destination: ' + destination
@@ -101,17 +99,9 @@ def synoindex_add_item(filename):
     else:
         print 'Error: ' + quote(filename) + ' does not exist.'
 
-def synoindex_del_file(filename):
+def synoindex_del_item(filename):
     if os.path.isfile(filename):
-        cmd = list(cmd_synoindex_del_file)
-        cmd.append(quote(filename))
-        execute(cmd)
-    else:
-        print 'Error: ' + quote(filename) + ' does not exist.'
-
-def synoindex_del_dir(filename):
-    if os.path.isdir(filename):
-        cmd = list(cmd_synoindex_del_dir)
+        cmd = list(cmd_synoindex_del_item)
         cmd.append(quote(filename))
         execute(cmd)
     else:
