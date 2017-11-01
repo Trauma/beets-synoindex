@@ -87,18 +87,19 @@ def synoindex_get_info(filename):
         else:
             print 'Error: ' + quote(filename) + ' is not a file.'
 
-def synoindex_add(filename):
-    if os.path.exists(filename):
-        if os.path.isdir(filename):
-            cmd = list(cmd_synoindex_add_dir)
-            cmd.append(quote(filename))
-            execute(cmd)
-        elif os.path.isfile(filename):
-            cmd = list(cmd_synoindex_add_file)
-            cmd.append(quote(filename))
-            execute(cmd)
-        else:
-            print 'Error: ' + quote(filename) + ' is not a file or directory.'
+def synoindex_add_album(filename):
+    if os.path.isdir(filename):
+        cmd = list(cmd_synoindex_add_album)
+        cmd.append(filename)
+        execute(cmd)
+    else:
+        print 'Error: ' + quote(filename) + ' does not exist.'
+
+def synoindex_add_item(filename):
+    if os.path.isfile(filename):
+        cmd = list(cmd_synoindex_add_item)
+        cmd.append(filename)
+        execute(cmd)
     else:
         print 'Error: ' + quote(filename) + ' does not exist.'
 
