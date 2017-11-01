@@ -19,12 +19,12 @@ cmd_synoindex_move     = ['dummycommand', '-N']
 class SynoIndex(BeetsPlugin):
     def __init__(self):
         super(SynoIndex, self).__init__()
-            self.register_listener('pluginload', self.loaded)
-            self.register_listener('item_imported', self.item_imported)
-            self.register_listener('album_imported', self.album_imported)
-            self.register_listener('item_removed', self.item_removed)
-            self.register_listener('item_moved', self.item_moved)
-            self.config.add({
+        self.register_listener('pluginload', self.loaded)
+        self.register_listener('item_imported', self.item_imported)
+        self.register_listener('album_imported', self.album_imported)
+        self.register_listener('item_removed', self.item_removed)
+        self.register_listener('item_moved', self.item_moved)
+        self.config.add({
             u'debug': False,
             u'command': '/usr/syno/bin/synoindex'
         })
