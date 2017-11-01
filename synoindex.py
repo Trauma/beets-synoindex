@@ -8,8 +8,8 @@ import os
 #  These values can be overwrite by beets config file
 debug = False
 
-cmd_synoindex_add_file = ['dummycommand', '-a']
-cmd_synoindex_add_dir  = ['dummycommand', '-A']
+cmd_synoindex_add_item = ['dummycommand', '-a']
+cmd_synoindex_add_album  = ['dummycommand', '-A']
 cmd_synoindex_del_file = ['dummycommand', '-d']
 cmd_synoindex_del_dir  = ['dummycommand', '-D']
 cmd_synoindex_get      = ['dummycommand', '-g', 'dummyfilename', '-t', 'music']
