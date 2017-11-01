@@ -74,15 +74,6 @@ def execute(cmd):
     subprocess.call(cmd)
 
 # Helpers: construct full command, then execute it
-def synoindex_get_info(filename):
-    if os.path.exists(filename):
-        if os.path.isfile(filename):
-            cmd = list(cmd_synoindex_get)
-            cmd[2] = quote(filename)
-            execute(cmd)
-        else:
-            print 'Error: ' + quote(filename) + ' is not a file.'
-
 def synoindex_add_album(filename):
     if os.path.isdir(filename):
         cmd = list(cmd_synoindex_add_album)
