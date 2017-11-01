@@ -99,10 +99,10 @@ def synoindex_del_item(filename):
         print 'Error: ' + quote(filename) + ' does not exist.'
 
 def synonindex_move_item(source, destination):
-    if os.path.isfile(source):
+    if os.path.isfile(destination):
         cmd = list(cmd_synoindex_move_item)
         cmd.append(quote(destination))
         cmd.append(quote(source))
         execute(cmd)
     else:
-        print 'Error: ' + quote(filename) + ' does not exist.'
+        print 'Error: ' + quote(destination) + ' does not exist.'
